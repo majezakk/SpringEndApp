@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма категории</title>
+</head>
+<body>
+<div th:replace="~{layout :: content}">
+    <h2 th:text="${category.id == null ? 'Создание новой категории' : 'Редактирование категории'}"></h2>
+    <form th:action="@{/categories}" th:object="${category}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Название категории</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a th:href="@{/categories}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+</body>
+</html>

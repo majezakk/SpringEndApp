@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма столика</title>
+</head>
+<body>
+<div th:replace="~{layout :: content}">
+    <h2 th:text="${table.id == null ? 'Создание нового столика' : 'Редактирование столика'}"></h2>
+    <form th:action="@{/tables}" th:object="${table}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="number" class="form-label">Номер столика</label>
+            <input type="number" class="form-control" id="number" th:field="*{number}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="capacity" class="form-label">Вместимость</label>
+            <input type="number" class="form-control" id="capacity" th:field="*{capacity}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a th:href="@{/tables}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма заказа</title>
+</head>
+<body>
+<div th:replace="~{layout :: content}">
+    <h2 th:text="${order.id == null ? 'Создание нового заказа' : 'Редактирование заказа'}"></h2>
+    <form th:action="@{/orders}" th:object="${order}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="customer" class="form-label">Клиент</label>
+            <select class="form-select" id="customer" th:field="*{customer}">
+                <option value="">Выберите клиента</option>
+                <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="table" class="form-label">Столик</label>
+            <select class="form-select" id="table" th:field="*{table}">
+                <option value="">Выберите столик</option>
+                <option th:each="table : ${tables}" th:value="${table.id}" th:text="${'Столик ' + table.number + ' (вместимость: ' + table.capacity + ')'}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('table')}" th:errors="*{table}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="waiter" class="form-label">Официант</label>
+            <select class="form-select" id="waiter" th:field="*{waiter}">
+                <option value="">Выберите официанта</option>
+                <option th:each="waiter : ${waiters}" th:value="${waiter.id}" th:text="${waiter.name}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('waiter')}" th:errors="*{waiter}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Дата и время</label>
+            <input type="datetime-local" class="form-control" id="date" th:field="*{date}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">Статус</label>
+            <input type="text" class="form-control" id="status" th:field="*{status}">
+            <div class="text-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a th:href="@{/orders}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+</body>
+</html>
