@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/tables")
 public class TableController {
-
     private final TableService tableService;
 
     @Autowired

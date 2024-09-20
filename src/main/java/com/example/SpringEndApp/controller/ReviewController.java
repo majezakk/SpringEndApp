@@ -15,7 +15,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/reviews")
 public class ReviewController {
-
     private final ReviewService reviewService;
     private final DishService dishService;
     private final CustomerService customerService;

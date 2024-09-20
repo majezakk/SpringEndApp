@@ -14,7 +14,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/payments")
 public class PaymentController {
-
     private final PaymentService paymentService;
     private final OrderService orderService;
 

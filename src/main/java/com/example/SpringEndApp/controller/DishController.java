@@ -14,7 +14,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/dishes")
 public class DishController {
-
     private final DishService dishService;
     private final CategoryService categoryService;
 

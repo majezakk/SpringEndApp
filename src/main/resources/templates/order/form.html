@@ -2,11 +2,50 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Форма заказа</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${order.id == null ? 'Создание нового заказа' : 'Редактирование заказа'}">Форма заказа</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div th:replace="~{layout :: content}">
-    <h2 th:text="${order.id == null ? 'Создание нового заказа' : 'Редактирование заказа'}"></h2>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Ресторан</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/categories}">Категории</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/dishes}">Блюда</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customers}">Клиенты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/tables}">Столики</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/waiters}">Официанты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/orders}">Заказы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/payments}">Оплаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/reviews}">Отзывы</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2 th:text="${order.id == null ? 'Создание нового заказа' : 'Редактирование заказа'}">Форма заказа</h2>
     <form th:action="@{/orders}" th:object="${order}" method="post">
         <input type="hidden" th:field="*{id}">
         <div class="mb-3">
@@ -21,7 +60,7 @@
             <label for="table" class="form-label">Столик</label>
             <select class="form-select" id="table" th:field="*{table}">
                 <option value="">Выберите столик</option>
-                <option th:each="table : ${tables}" th:value="${table.id}" th:text="${'Столик ' + table.number + ' (вместимость: ' + table.capacity + ')'}"></option>
+                <option th:each="table : ${tables}" th:value="${table.id}" th:text="${'Столик ' + table.number + ' (Вместимость: ' + table.capacity + ')'}"></option>
             </select>
             <div class="text-danger" th:if="${#fields.hasErrors('table')}" th:errors="*{table}"></div>
         </div>
@@ -34,12 +73,12 @@
             <div class="text-danger" th:if="${#fields.hasErrors('waiter')}" th:errors="*{waiter}"></div>
         </div>
         <div class="mb-3">
-            <label for="date" class="form-label">Дата и время</label>
+            <label for="date" class="form-label">Дата и время заказа</label>
             <input type="datetime-local" class="form-control" id="date" th:field="*{date}" required>
             <div class="text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
         </div>
         <div class="mb-3">
-            <label for="status" class="form-label">Статус</label>
+            <label for="status" class="form-label">Статус заказа</label>
             <input type="text" class="form-control" id="status" th:field="*{status}">
             <div class="text-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
         </div>
@@ -47,5 +86,7 @@
         <a th:href="@{/orders}" class="btn btn-secondary">Отмена</a>
     </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

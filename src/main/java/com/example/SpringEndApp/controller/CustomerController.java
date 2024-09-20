@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
-
     private final CustomerService customerService;
 
     @Autowired

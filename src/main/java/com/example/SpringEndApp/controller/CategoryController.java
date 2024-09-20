@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
-
     private final CategoryService categoryService;
 
     @Autowired
@@ -34,7 +33,8 @@ public class CategoryController {
     }
 
     @PostMapping
-    public String saveCategory(@Valid @ModelAttribute("category") CategoryModel category, BindingResult result) {
+    public String saveCategory(@Valid @ModelAttribute("category") CategoryModel category,
+                               BindingResult result) {
         if (result.hasErrors()) {
             return "category/form";
         }

@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/waiters")
 public class WaiterController {
-
     private final WaiterService waiterService;
 
     @Autowired
